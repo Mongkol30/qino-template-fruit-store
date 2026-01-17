@@ -31,17 +31,23 @@ const auth = {
   firstName: 'auth.firstName',
   lastName: 'auth.lastName',
   email: 'auth.email',
+  phoneOrUsername: 'auth.phoneOrUsername',
+  phoneOrUsernamePlaceholder: 'auth.phoneOrUsernamePlaceholder',
   password: 'auth.password',
+  passwordPlaceholder: 'auth.passwordPlaceholder',
   rememberMe: 'auth.rememberMe',
 
   // Errors
   invalidCredentials: 'auth.invalidCredentials',
   emailRequired: 'auth.emailRequired',
+  phoneOrUsernameRequired: 'auth.phoneOrUsernameRequired',
   passwordRequired: 'auth.passwordRequired',
 
   // Links
   noAccount: 'auth.noAccount',
   haveAccount: 'auth.haveAccount',
+  trackOrder: 'auth.trackOrder',
+  notRegisteredYet: 'auth.notRegisteredYet',
 } as const;
 
 export default auth;

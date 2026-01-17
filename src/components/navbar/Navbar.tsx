@@ -8,6 +8,7 @@ import { logout } from '@slices/index';
 import { useAppDispatch, useAppSelector } from '@stores/index';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
+import Logo2 from '@assets/Logo2.png';
 
 interface NavItem {
   path: string;
@@ -48,7 +49,11 @@ const Navbar: FC = () => {
         <Row justify="between" align="center" className="py-4">
           <Link to="/">
             <Heading as="h1" size="lg" color="gradient">
-              Qino Template
+            <img
+                  src={Logo2}
+                  alt="Fruit basket"
+                  className="w-full h-12 object-contain drop-shadow-md"
+                />
             </Heading>
           </Link>
 

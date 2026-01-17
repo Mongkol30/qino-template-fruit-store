@@ -3,7 +3,7 @@ import auth from '../../tokens/auth';
 const authTranslation = {
   // Login
   [auth.login]: 'เข้าสู่ระบบ',
-  [auth.loginTitle]: 'ยินดีต้อนรับกลับ',
+  [auth.loginTitle]: 'เข้าสู่ระบบ',
   [auth.loginSubtitle]: 'ลงชื่อเข้าใช้บัญชีของคุณ',
   [auth.loginButton]: 'เข้าสู่ระบบ',
   [auth.loginSuccess]: 'เข้าสู่ระบบสำเร็จ',
@@ -32,17 +32,23 @@ const authTranslation = {
   [auth.firstName]: 'ชื่อ',
   [auth.lastName]: 'นามสกุล',
   [auth.email]: 'อีเมล',
+  [auth.phoneOrUsername]: 'เบอร์โทรศัพท์/ชื่อผู้ใช้',
+  [auth.phoneOrUsernamePlaceholder]: 'หมายเลขโทรศัพท์/ชื่อผู้ใช้',
   [auth.password]: 'รหัสผ่าน',
+  [auth.passwordPlaceholder]: 'รหัสผ่าน',
   [auth.rememberMe]: 'จดจำฉัน',
 
   // Errors
   [auth.invalidCredentials]: 'อีเมลหรือรหัสผ่านไม่ถูกต้อง',
   [auth.emailRequired]: 'กรุณากรอกอีเมล',
+  [auth.phoneOrUsernameRequired]: 'กรุณากรอกเบอร์โทรศัพท์หรือชื่อผู้ใช้',
   [auth.passwordRequired]: 'กรุณากรอกรหัสผ่าน',
 
   // Links
   [auth.noAccount]: 'ยังไม่มีบัญชี?',
   [auth.haveAccount]: 'มีบัญชีอยู่แล้ว?',
+  [auth.trackOrder]: 'Track your order',
+  [auth.notRegisteredYet]: 'ยังไม่เคยสมัครสมาชิก?',
 };
 
 export default authTranslation;

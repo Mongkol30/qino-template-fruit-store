@@ -1,8 +1,9 @@
 import type { FC } from 'react';
 
-import { Column, CustomScrollbar, Flex, Text } from '@components/core';
+import { Column, CustomScrollbar, Text } from '@components/core';
 import { Navbar } from '@components/navbar';
 import { Outlet } from 'react-router-dom';
+import { Footer } from '@/components/footer';
 
 /**
  * AuthLayout - Layout for authentication pages with navbar
@@ -15,16 +16,17 @@ const AuthLayout: FC = () => {
       <Navbar />
 
       {/* Main Content */}
-      <Flex justify="center" align="center" className="flex-1 px-4">
-        <Outlet />
-      </Flex>
+      <div className="flex-1">
+          <Outlet />
+      </div>
 
       {/* Footer */}
-      <footer className="border-t border-neutral-200/50 py-4 dark:border-neutral-800">
+      {/* <footer className="border-t border-neutral-200/50 py-4 dark:border-neutral-800">
         <Text size="sm" align="center" color="muted">
           © {new Date().getFullYear()} Qino Template. All rights reserved.
         </Text>
-      </footer>
+      </footer> */}
+      <Footer />
       </Column>
     </CustomScrollbar>
   );
