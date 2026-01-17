@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+/*
+ * Dark mode strategy: use .dark class instead of media query
+ * This allows manual theme switching via JavaScript
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Theme Configuration
+ * Define all custom colors using @theme directive
+ * This allows using standard Tailwind classes: bg-primary-600, text-neutral-500, etc.
+ */
+@theme {
+  /* Animations */
+  --animate-spin-slow: spin 20s linear infinite;
+
+  /* Background colors */
+  --color-bg-light: #FFFFFF;
+  --color-bg-dark: #020618;
+
+  /* Primary - Indigo */
+  --color-primary-50: #EEF2FF;
+  --color-primary-100: #E0E7FF;
+  --color-primary-200: #C7D2FE;
+  --color-primary-300: #A5B4FC;
+  --color-primary-400: #818CF8;
+  --color-primary-500: #6366F1;
+  --color-primary-600: #4F46E5;
+  --color-primary-700: #4338CA;
+  --color-primary-800: #3730A3;
+  --color-primary-900: #312E81;
+  --color-primary-950: #1E1B4B;
+
+  /* Secondary - Purple/Violet */
+  --color-secondary-50: #F5F3FF;
+  --color-secondary-100: #EDE9FE;
+  --color-secondary-200: #DDD6FE;
+  --color-secondary-300: #C4B5FD;
+  --color-secondary-400: #A78BFA;
+  --color-secondary-500: #8B5CF6;
+  --color-secondary-600: #7C3AED;
+  --color-secondary-700: #6D28D9;
+  --color-secondary-800: #5B21B6;
+  --color-secondary-900: #4C1D95;
+  --color-secondary-950: #2E1065;
+
+  /* Neutral - Slate */
+  --color-neutral-50: #F8FAFC;
+  --color-neutral-100: #F1F5F9;
+  --color-neutral-200: #E2E8F0;
+  --color-neutral-300: #CBD5E1;
+  --color-neutral-400: #94A3B8;
+  --color-neutral-500: #64748B;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1E293B;
+  --color-neutral-900: #0F172A;
+  --color-neutral-950: #020617;
+
+  /* Success - Green */
+  --color-success-50: #F0FDF4;
+  --color-success-100: #DCFCE7;
+  --color-success-200: #BBF7D0;
+  --color-success-300: #86EFAC;
+  --color-success-400: #4ADE80;
+  --color-success-500: #22C55E;
+  --color-success-600: #16A34A;
+  --color-success-700: #15803D;
+  --color-success-800: #166534;
+  --color-success-900: #14532D;
+
+  /* Warning - Amber */
+  --color-warning-50: #FFFBEB;
+  --color-warning-100: #FEF3C7;
+  --color-warning-200: #FDE68A;
+  --color-warning-300: #FCD34D;
+  --color-warning-400: #FBBF24;
+  --color-warning-500: #F59E0B;
+  --color-warning-600: #D97706;
+  --color-warning-700: #B45309;
+  --color-warning-800: #92400E;
+  --color-warning-900: #78350F;
+
+  /* Error - Red */
+  --color-error-50: #FEF2F2;
+  --color-error-100: #FEE2E2;
+  --color-error-200: #FECACA;
+  --color-error-300: #FCA5A5;
+  --color-error-400: #F87171;
+  --color-error-500: #EF4444;
+  --color-error-600: #DC2626;
+  --color-error-700: #B91C1C;
+  --color-error-800: #991B1B;
+  --color-error-900: #7F1D1D;
+
+  /* Info - Blue */
+  --color-info-50: #EFF6FF;
+  --color-info-100: #DBEAFE;
+  --color-info-200: #BFDBFE;
+  --color-info-300: #93C5FD;
+  --color-info-400: #60A5FA;
+  --color-info-500: #3B82F6;
+  --color-info-600: #2563EB;
+  --color-info-700: #1D4ED8;
+  --color-info-800: #1E40AF;
+  --color-info-900: #1E3A8A;
+
+  /* Pink - for gradients and accents */
+  --color-pink-50: #FDF2F8;
+  --color-pink-100: #FCE7F3;
+  --color-pink-200: #FBCFE8;
+  --color-pink-300: #F9A8D4;
+  --color-pink-400: #F472B6;
+  --color-pink-500: #EC4899;
+  --color-pink-600: #DB2777;
+  --color-pink-700: #BE185D;
+  --color-pink-800: #9D174D;
+  --color-pink-900: #831843;
+}
+
+/* Custom base styles */
+@layer base {
+  /* Light mode (default) - use subtle gray for page bg so white cards stand out */
+  body {
+    @apply min-h-screen bg-neutral-50 text-neutral-900 antialiased transition-colors duration-300;
+  }
+
+  /* Dark mode - dark blue-gray background */
+  .dark body {
+    @apply bg-bg-dark text-neutral-100;
+  }
+
+  a {
+    @apply font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300;
+  }
+}
+
+/* Component styles */
+@layer components {
+  /* Default button - gray bg contrasts with white page background */
+  .btn {
+    @apply rounded-lg border px-5 py-2.5 font-medium cursor-pointer transition-all duration-200
+           bg-neutral-100 text-neutral-800 border-neutral-300
+           hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700
+           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
+           shadow-sm;
+  }
+
+  /* Dark mode button - lighter bg to contrast with dark page background */
+  .dark .btn {
+    @apply bg-neutral-700 text-neutral-100 border-neutral-600
+           hover:border-primary-400 hover:bg-neutral-600 hover:text-primary-300;
+    --tw-ring-offset-color: var(--color-bg-dark);
+  }
+
+  /* Primary button class */
+  .btn-primary {
+    @apply bg-primary-600 text-white border-primary-600
+           hover:bg-primary-700 hover:border-primary-700;
+  }
+
+  .dark .btn-primary {
+    @apply bg-primary-500 border-primary-500
+           hover:bg-primary-400 hover:border-primary-400;
+  }
+
+  /* Card - white on light, dark gray on dark */
+  .card {
+    @apply p-8 rounded-xl bg-white shadow-md border border-neutral-200;
+  }
+
+  .dark .card {
+    @apply bg-neutral-800 border-neutral-700 shadow-xl shadow-black/30;
+  }
+}
+
+/* ============================================
+ * CustomScrollbar (OverlayScrollbars) Setup
+ * ============================================ */
+@layer base {
+  /* Fixed height for CustomScrollbar to work */
+  html,
+  body,
+  #root {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* Global scrollbar hiding */
+  .hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}

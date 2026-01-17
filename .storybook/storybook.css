@@ -1,0 +1,136 @@
+/* Storybook Dark Theme Styles */
+
+/* When dark mode is active */
+html.dark .sbdocs-wrapper,
+html.dark .sbdocs-content,
+html.dark .sbdocs {
+  background-color: #1a1a2e !important;
+  color: #e2e8f0 !important;
+}
+
+/* Docs title and headings */
+html.dark .sbdocs-title,
+html.dark .sbdocs h1,
+html.dark .sbdocs h2,
+html.dark .sbdocs h3,
+html.dark .sbdocs h4,
+html.dark .sbdocs h5,
+html.dark .sbdocs p,
+html.dark .sbdocs span,
+html.dark .sbdocs-p {
+  color: #e2e8f0 !important;
+}
+
+/* ArgsTable / Controls table */
+html.dark .docblock-argstable,
+html.dark .docblock-argstable th,
+html.dark .docblock-argstable td,
+html.dark .docblock-argstable-head,
+html.dark .docblock-argstable-body {
+  background-color: #1e1e3f !important;
+  color: #e2e8f0 !important;
+  border-color: #2d2d5a !important;
+}
+
+html.dark .docblock-argstable thead tr {
+  background-color: #252547 !important;
+}
+
+html.dark .docblock-argstable tbody tr {
+  background-color: #1e1e3f !important;
+  border-color: #2d2d5a !important;
+}
+
+html.dark .docblock-argstable tbody tr:hover {
+  background-color: #2a2a55 !important;
+}
+
+/* Property names */
+html.dark .css-1ljj28a,
+html.dark [class*="ArgRow"] span,
+html.dark .css-in3yi3 {
+  color: #60a5fa !important;
+}
+
+/* Description text */
+html.dark .css-o1d7ko,
+html.dark [class*="description"] {
+  color: #94a3b8 !important;
+}
+
+/* Code blocks */
+html.dark .docblock-code-toggle,
+html.dark pre,
+html.dark code {
+  background-color: #0f0f23 !important;
+  color: #e2e8f0 !important;
+}
+
+/* Preview container */
+html.dark .sbdocs-preview,
+html.dark .docs-story {
+  background-color: #1a1a2e !important;
+  border-color: #2d2d5a !important;
+}
+
+/* Show code button */
+html.dark .docblock-code-toggle {
+  background-color: #252547 !important;
+  color: #e2e8f0 !important;
+  border-color: #2d2d5a !important;
+}
+
+/* Links */
+html.dark .sbdocs a {
+  color: #60a5fa !important;
+}
+
+/* Required asterisk */
+html.dark .css-in3yi3 span[title="Required"] {
+  color: #f87171 !important;
+}
+
+/* Subheadings like "Name", "Description", etc */
+html.dark th {
+  color: #94a3b8 !important;
+}
+
+/* Input controls in args table */
+html.dark input,
+html.dark select,
+html.dark textarea {
+  background-color: #1e1e3f !important;
+  color: #e2e8f0 !important;
+  border-color: #2d2d5a !important;
+}
+
+/* Toolbar area */
+html.dark .css-sqdry3,
+html.dark .css-1xdhyk6 {
+  background-color: #141428 !important;
+  border-color: #2d2d5a !important;
+}
+
+/* Light mode overrides */
+html:not(.dark) .sbdocs-wrapper,
+html:not(.dark) .sbdocs-content,
+html:not(.dark) .sbdocs {
+  background-color: #ffffff !important;
+  color: #1a1a2e !important;
+}
+
+html:not(.dark) .sbdocs-title,
+html:not(.dark) .sbdocs h1,
+html:not(.dark) .sbdocs h2,
+html:not(.dark) .sbdocs h3,
+html:not(.dark) .sbdocs p {
+  color: #1a1a2e !important;
+}
+
+html:not(.dark) .docblock-argstable,
+html:not(.dark) .docblock-argstable th,
+html:not(.dark) .docblock-argstable td {
+  background-color: #ffffff !important;
+  color: #1a1a2e !important;
+  border-color: #e2e8f0 !important;
+}

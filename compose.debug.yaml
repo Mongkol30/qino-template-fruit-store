@@ -1,0 +1,41 @@
+services:
+  # ============================================
+  # Vite Dev Server (Local Development)
+  # ============================================
+  app:
+    image: node:24-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    env_file:
+      - .env.local
+    environment:
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"
+      WATCHPACK_POLLING: "true"
+    ports:
+      - 5173:5173
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+
+  # ============================================
+  # Storybook
+  # ============================================
+  storybook:
+    image: node:24-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    environment:
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"
+      WATCHPACK_POLLING: "true"
+    ports:
+      - 6006:6006
+    command: sh -c "npm install && npm run storybook -- --host 0.0.0.0"
+    depends_on:
+      - app
+
+volumes:
+  node_modules:

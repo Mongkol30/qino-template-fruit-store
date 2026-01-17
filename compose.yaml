@@ -1,0 +1,49 @@
+services:
+  # ============================================
+  # Production (default)
+  # Usage: make prod or make prod-build
+  # ============================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BUILD_ENV: production
+        VITE_ENVIRONMENT: production
+        VITE_API_URL: ${VITE_API_URL:-https://api.example.com/api}
+        VITE_API_TIMEOUT: ${VITE_API_TIMEOUT:-30000}
+        VITE_APP_NAME: ${VITE_APP_NAME:-Qino App}
+        VITE_APP_VERSION: ${VITE_APP_VERSION:-1.0.0}
+    image: qino-templete:${BUILD_ENV:-production}
+    container_name: qino-templete-${BUILD_ENV:-prod}
+    ports:
+      - "${APP_PORT:-8080}:80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ============================================
+  # Development with Hot Reload
+  # Usage: make dev or make dev-build
+  # ============================================
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: qino-templete-dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env.local
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    profiles:
+      - dev
