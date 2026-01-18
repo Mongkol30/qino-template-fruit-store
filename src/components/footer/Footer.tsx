@@ -48,7 +48,7 @@ const Footer: FC<FooterProps> = ({
   bottomText,
 }) => {
   return (
-    <footer className="bg-white border-t border-neutral-200 dark:bg-bg-dark dark:border-neutral-800">
+    <footer className=" border-t border-neutral-200 dark:bg-bg-dark dark:border-neutral-800">
       <Container size="xl">
         <div className="py-10">
           <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
