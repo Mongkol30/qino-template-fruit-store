@@ -44,7 +44,7 @@ const Navbar: FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white/95 backdrop-blur-md dark:border-neutral-800 dark:bg-bg-dark/95">
+    <header className="sticky top-0 z-50 border-b border-neutral-200 bg-[#1a4d3a] backdrop-blur-md dark:border-neutral-800 dark:bg-bg-dark/95">
       <Container size="xl">
         <Row justify="between" align="center" className="py-4">
           <Link to="/">
@@ -62,10 +62,10 @@ const Navbar: FC = () => {
               <li key={item.path}>
                 <Link
                   to={item.path}
-                  className={`transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
+                  className={`transition-colors hover:text-primary-600 dark:hover:text-primary-400  ${
                     isActiveLink(item.path)
-                      ? 'font-semibold text-primary-600 dark:text-primary-400'
-                      : 'text-neutral-600 dark:text-neutral-400'
+                      ? 'font-semibold text-white dark:text-primary-400 underline underline-offset-4'
+                      : 'text-white dark:text-neutral-400'
                   }`}
                 >
                   {item.label}
