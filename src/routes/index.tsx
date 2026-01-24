@@ -1,3 +1,4 @@
+import { ProductDetail } from '@/features/productDetail';
 import { AuthGuard, GuestGuard } from '@guards/index';
 import { AuthLayout, DashboardLayout, MainLayout } from '@layouts/index';
 import { AboutPage } from '@pages/about';
@@ -21,6 +22,17 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '/details/:id',
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <ProductDetail />,
+      },
+    ],
+  },
+
 
   // Auth Routes (Guest Only - redirect to dashboard if logged in)
   {
