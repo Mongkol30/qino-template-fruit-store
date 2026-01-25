@@ -64,7 +64,8 @@ const LoginContent: FC = () => {
       dispatch(login({ user: mockUser, token: mockToken }));
 
       // Navigate to dashboard after successful login
-      navigate('/dashboard');
+      navigate('/', { replace: true });
+
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Login failed');
     } finally {
@@ -80,7 +81,7 @@ const LoginContent: FC = () => {
 
   return (
     <>
-    
+
       {/* Main Content - Dark Green Background */}
       <main className="bg-[#1a4d3a] flex items-center justify-center py-12 px-4 min-h-[calc(100vh-200px)]">
         <Container size="xl" className="w-full">

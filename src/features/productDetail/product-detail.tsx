@@ -1,13 +1,13 @@
 import type { FC } from 'react';
 import { useEffect, useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
-
+import { Link, useParams } from 'react-router-dom';
 import products from '@/mockItem/listProduct';
 import { categoryById } from '@/mockItem/categories';
 import { shopById } from '@/mockItem/shops';
 import { productDetailByProductId } from '@/mockItem/productDetail';
-
 import type { Shop } from '@/mockItem/shops';
+import productReviews from '@/mockItem/productReviews';
+import { Pagination } from '@components/core/pagination';
 
 const StarRating = ({ rating }: { rating: number }) => (
   <div className="flex text-orange-500 text-sm gap-0.5">
@@ -84,6 +84,7 @@ const ProductDetail: FC = () => {
 
     return () => window.clearInterval(t);
   }, [isPaused, images.length]);
+
 
 
   return (
@@ -298,9 +299,21 @@ const ProductDetail: FC = () => {
       <div className="mt-6">
         <ShopCard shop={shop ?? fallbackShop()} />
       </div>
-      <div className="mt-6">
-        <ProductInfoCard product={product} detail={detail} />
+
+      {/* ===== BELOW SHOP: LEFT (Info+Reviews) + RIGHT (Suggested) ===== */}
+      <div className="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* LEFT */}
+        <div className="lg:col-span-9 space-y-6">
+          <ProductInfoCard product={product} detail={detail} />
+          <ProductReviewsCard productId={product.id} />
+        </div>
+
+        {/* RIGHT */}
+        <div className="lg:col-span-3">
+          <SuggestedProductsCard currentProductId={product.id} />
+        </div>
       </div>
+
 
     </div>
   );
@@ -409,12 +422,189 @@ const InfoRow = ({
 const fallbackShop = (): Shop => ({
   id: 0,
   name: 'ร้านค้า',
-  avatar: '/shop/shop-1.png',
+  avatar: '/shop/shop1.png',
   score: 0,
   products: 0,
   followers: 0,
   activeText: '-',
 });
+
+
+const ReviewRow = ({ r }: { r: any }) => (
+  <div className="py-6">
+    <div className="flex gap-4">
+      {/* avatar */}
+      <img
+        src={r.avatar}
+        alt={r.username}
+        className="h-10 w-10 rounded-full object-cover"
+      />
+
+      {/* content */}
+      <div className="flex-1">
+        <div className="flex items-start justify-between gap-2">
+          <div>
+            <p className="font-semibold text-neutral-900">{r.username}</p>
+
+            <StarRating rating={r.rating} />
+            <div className="mt-1 flex items-center gap-2">
+              <span className="text-xs text-neutral-400">{r.createdAt}</span>
+              {r.variantText && (
+                <span className="text-xs text-neutral-400">{r.variantText}</span>
+              )}
+            </div>
+          </div>
+
+          {/* review image on right */}
+          {r.image && (
+            <img
+              src={r.image}
+              alt="review"
+              className="h-20 w-20 object-cover rounded border border-neutral-200"
+            />
+          )}
+        </div>
+        {/* รีวิวคุณภาพ / รสชาติ */}
+        <div className="mt-2 text-xs text-neutral-600">
+          {r.qualityText && (
+            <div>
+              <span className="font-medium text-neutral-700">คุณภาพ:</span>{' '}
+              {r.qualityText}
+            </div>
+          )}
+          {r.tasteText && (
+            <div>
+              <span className="font-medium text-neutral-700">รสชาติ:</span>{' '}
+              {r.tasteText}
+            </div>
+          )}
+        </div>
+        <p className="mt-3 text-sm text-neutral-700 leading-6">
+          {r.body}
+        </p>
+      </div>
+    </div>
+  </div>
+);
+
+const ProductReviewsCard = ({ productId }: { productId: number }) => {
+  const reviews = useMemo(
+    () => productReviews.filter((x) => x.productId === productId),
+    [productId]
+  );
+
+  const ITEMS_PER_PAGE = 3;
+  const [page, setPage] = useState(1);
+
+  const totalPages = Math.max(1, Math.ceil(reviews.length / ITEMS_PER_PAGE));
+  const start = (page - 1) * ITEMS_PER_PAGE;
+  const current = reviews.slice(start, start + ITEMS_PER_PAGE);
+
+  return (
+    <div className="bg-white border border-neutral-200 rounded-xl p-6">
+      <p className="font-semibold text-neutral-900 mb-2">คะแนนสินค้า</p>
+
+      {/* list */}
+      <div className="divide-y divide-neutral-200">
+        {current.map((r) => (
+          <ReviewRow key={r.id} r={r} />
+        ))}
+      </div>
+
+      {/* pagination */}
+      <div className="mt-6 flex justify-center">
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+          siblingCount={1}
+          showFirstLast
+        />
+      </div>
+    </div>
+  );
+};
+
+
+const SmallStarRating = ({ rating }: { rating: number }) => (
+  <div className="flex text-orange-500 text-xs gap-0.5 leading-none">
+    {Array.from({ length: 5 }).map((_, i) => (
+      <span key={i}>{rating >= i + 1 ? '★' : '☆'}</span>
+    ))}
+  </div>
+);
+
+const SuggestedProductsCard = ({
+  currentProductId,
+}: {
+  currentProductId: number;
+}) => {
+  const items = useMemo(() => {
+    const list = products.filter((p) => p.id !== currentProductId);
+    return list.slice(0, 5);
+  }, [currentProductId]);
+
+  return (
+    <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-xl p-4">
+      <p className="font-semibold text-sm text-neutral-900 dark:text-neutral-100 mb-3">
+        สินค้ายอดนิยม
+      </p>
+
+      <div className="space-y-4">
+        {items.map((item) => (
+          <Link
+            key={item.id}
+            to={`/details/${item.id}`}
+            className="block border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden hover:shadow-sm transition"
+          >
+            <div className="relative">
+              {!!item.badge && (
+                <span
+                  className={[
+                    'absolute left-2 top-2 text-[10px] font-semibold px-2 py-0.5 rounded',
+                    item.badgeBg ?? 'bg-yellow-300 text-black',
+                  ].join(' ')}
+                >
+                  {item.badge}
+                </span>
+              )}
+
+              <img
+                src={item.image?.[0] ?? item.image}
+                alt={item.name}
+                className="h-28 w-full object-cover"
+              />
+            </div>
+
+            <div className="p-3">
+              <div className="flex items-center gap-2">
+                <SmallStarRating rating={item.rating} />
+                <span className="text-xs text-neutral-500">
+                  ({item.reviews?.toLocaleString?.() ?? item.reviews})
+                </span>
+              </div>
+
+              <p className="mt-2 text-xs text-neutral-800 dark:text-neutral-200 line-clamp-2">
+                {item.name}
+              </p>
+
+              <div className="mt-2 flex items-baseline gap-2">
+                {item.originalPrice && (
+                  <span className="text-xs text-neutral-400 line-through">
+                    ${item.originalPrice}
+                  </span>
+                )}
+                <span className="text-sm font-semibold text-blue-600">
+                  ${item.price}
+                </span>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 
 

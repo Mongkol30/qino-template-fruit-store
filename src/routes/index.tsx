@@ -46,19 +46,19 @@ export const router = createBrowserRouter([
   },
 
   // Protected Routes (Auth Required)
-  {
-    element: <AuthGuard />,
-    children: [
-      {
-        element: <DashboardLayout />,
-        children: [
-          { path: 'about', element: <AboutPage /> },
-          { path: 'dashboard', element: <DashboardPage /> },
-          { path: 'blank', element: <BlankPage /> },
-        ],
-      },
-    ],
-  },
+  // {
+  //   element: <AuthGuard />,
+  //   children: [
+  //     {
+  //       element: <DashboardLayout />,
+  //       children: [
+  //         { path: 'about', element: <AboutPage /> },
+  //         { path: 'dashboard', element: <DashboardPage /> },
+  //         { path: 'blank', element: <BlankPage /> },
+  //       ],
+  //     },
+  //   ],
+  // },
 
   // Error Pages
   { path: '401', element: <Error401Page /> },
