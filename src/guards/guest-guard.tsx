@@ -22,7 +22,7 @@ const GuestGuard: FC = () => {
 
   if (isAuthenticated) {
     // Redirect to where they came from, or dashboard
-    const from = (location.state as { from?: Location })?.from?.pathname || '/dashboard';
+    const from = (location.state as { from?: Location })?.from?.pathname || '/';
     return <Navigate to={from} replace />;
   }
 

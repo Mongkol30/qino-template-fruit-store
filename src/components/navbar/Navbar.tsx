@@ -30,8 +30,8 @@ const Navbar: FC = () => {
 
   const authNavItems: NavItem[] = [
     { path: '/', label: t(tokens.nav.home) },
-    { path: '/about', label: t(tokens.nav.about) },
-    { path: '/dashboard', label: t(tokens.nav.dashboard) },
+    // { path: '/about', label: t(tokens.nav.about) },
+    // { path: '/dashboard', label: t(tokens.nav.dashboard) },
   ];
 
   const navItems = isAuthenticated ? authNavItems : publicNavItems;
